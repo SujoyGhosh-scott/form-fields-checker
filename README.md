@@ -4,7 +4,7 @@ npm package to validate form fields like email, phone no etc, check password str
 To install the package run
 
 ```sh
-npm i form-validator
+npm i form-fields-checker
 ```
 
 As of now there are three main functions, isValidEmail, checkPasswordStrength and generatePassword. Detail explaination of them are given below.
