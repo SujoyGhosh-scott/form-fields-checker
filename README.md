@@ -1,4 +1,4 @@
-# from-validator
+# form-fields-checker
 
 npm package to validate form fields like email, phone no etc, check password strength, suggest new passwords, get country code and initials of all countries and so on. Make the form field validation process much easier and faster.
 To install the package run
