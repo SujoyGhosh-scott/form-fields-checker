@@ -126,6 +126,80 @@ const generatePassword = (
   return password;
 };
 
+/**
+ * Dynamically generates the regular expression based on the given format
+ * @param {string} format
+ * @returns
+ */
+const genRegEx = (format) => {
+  let nos = format.split(" ");
+  let pattern = "";
+  let startFrom = 0;
+
+  // error handling for invalid cc
+  console.log(nos);
+  if (
+    !Number.isInteger(parseInt(nos[0])) &&
+    !["+(cc)", "(+cc)", "(cc)", "+cc", "cc"].includes(nos[0])
+  ) {
+    return "invalid format";
+  }
+
+  //if country code is there in the first item,
+  // pattern = "[\\+]?[(]?[0-9]{3}[)] ";
+  if (nos[0] === "+(cc)") {
+    //if starts with +(cc)
+    pattern = "[\\+]+[(]+\\d{1,3}[)]+ ";
+    startFrom = 1;
+  } else if (nos[0] === "(+cc)") {
+    //or it may start with (+cc)
+    pattern = "[(]+[+]+\\d{1,3}[)]+ ";
+    startFrom = 1;
+  } else if (nos[0] === "(cc)") {
+    //or it may start with (cc)
+    pattern = "[+]?\\d{1,3} ";
+    startFrom = 1;
+  } else if (nos[0] === "+cc") {
+    //or it may start with +cc
+    pattern = "[+]+\\d{1,3} ";
+    startFrom = 1;
+  } else if (nos[0] === "cc") {
+    //or it may start with cc
+    pattern = "\\d{1,3} ";
+    startFrom = 1;
+  }
+
+  for (let i = startFrom; i < nos.length; i++) {
+    pattern += `\\d{${nos[i]}}`;
+    if (i < nos.length - 1) {
+      pattern += " ";
+    }
+  }
+
+  console.log(nos, pattern);
+
+  let regEx = new RegExp(pattern);
+  return regEx;
+};
+
+/**
+ * This function checks if the given phone no is valid or not. If the phone no needs to be in a specific format that also can be done by providing the format param. To know more about foramt please read the docs.
+ * @param {string} phone
+ * @param {string} format
+ * @returns {} True if the phone no is valid, if the format is wrong then "invalid format"
+ */
+const isValidPhone = (phone, format) => {
+  //if format is not provided, then a common regex will be used to validate the phone no
+  //if format is array, then map format otherwise run genRegEx only once
+  let re = genRegEx(format);
+  if (re === "invalid format") {
+    return re;
+  }
+  return re.test(phone);
+};
+
+console.log(isValidPhone());
+
 module.exports = {
   isValidEmail,
   checkPasswordStrength,

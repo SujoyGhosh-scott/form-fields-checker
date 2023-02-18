@@ -1,6 +1,6 @@
 {
   "name": "form-fields-checker",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "npm package to validate form fields like email, phone etc, check password strength, suggest new passwords, and make the form field validation process much easier",
   "main": "index.js",
   "scripts": {
