@@ -68,6 +68,23 @@ this way you can different formats can be validated if required.
 
 ### example
 
+```js
+const fieldsChecker = require("form-fields-checker");
+
+console.log(fieldsChecker.isValidPhone("9999999999")); // true
+console.log(fieldsChecker.isValidPhone("+919999999999")); // true
+console.log(fieldsChecker.isValidPhone("999 999 9999")); // true
+console.log(fieldsChecker.isValidPhone("+919999 9 9999 9")); // false
+
+console.log(fieldsChecker.isValidPhone("1234 123456", "4 6")); // true
+console.log(fieldsChecker.isValidPhone("12345 12345", "4 6")); // false
+
+console.log(fieldsChecker.isValidPhone("+91 12345 12345", "+cc 5 5")); // true
+console.log(fieldsChecker.isValidPhone("+91 12345 12345", "(+cc) 5 5")); // false
+console.log(fieldsChecker.isValidPhone("+(91) 12345 12345", "(+cc) 5 5")); // false
+console.log(fieldsChecker.isValidPhone("(+91) 12345 12345", "(+cc) 5 5")); // true
+```
+
 ## checkPasswordStrength()
 
 This functions checks the strength of the given password and returns how strong it is and a list suggetions to further strengthen the password. Strength can be one of these values `invalid | weak | moderate | strong | very strong` The parameters fo the function is explained below.

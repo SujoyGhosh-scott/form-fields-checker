@@ -201,6 +201,10 @@ const genRegEx = (format) => {
  * @returns {boolean} True if the phone no is valid, if the format is wrong then "invalid format"
  */
 const isValidPhone = (phone, format) => {
+  if (!format) {
+    let re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+    return re.test(phone);
+  }
   //if format is not provided, then a common regex will be used to validate the phone no
   //if format is array, then map format otherwise run genRegEx only once
   let re = genRegEx(format);
