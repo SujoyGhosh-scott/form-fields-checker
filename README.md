@@ -19,7 +19,7 @@ Checks if the provided email is valid or not
 
 ### example
 
-```sh
+```js
 const fieldsChecker = require("form-fields-checker");
 
 console.log(fieldsChecker.isValidEmail("testemail@gmail.com")); //true
@@ -36,7 +36,7 @@ Checks if the provided link is valid or not.
 
 ### example
 
-```sh
+```js
 const fieldsChecker = require("form-fields-checker");
 
 console.log(fieldsChecker.isValidEmail("testemail@gmail.com")); //true
@@ -86,7 +86,7 @@ This functions checks the strength of the given password and returns how strong 
 
 ### examples
 
-```sh
+```js
 const fieldsChecker = require("form-fields-checker");
 
 console.log(fieldsChecker.checkPasswordStrength("1234", 8));
@@ -126,7 +126,7 @@ This function generates and returns a string password. And if some specific type
 
 ### examples
 
-```sh
+```js
 const fieldsChecker = require("form-fields-checker");
 
 console.log(fieldsChecker.generatePassword(8, 12)); // ?[@R/x/m1
