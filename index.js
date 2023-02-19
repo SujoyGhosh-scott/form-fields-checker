@@ -10,6 +10,18 @@ const isValidEmail = (email) => {
 };
 
 /**
+ * Checks if the given link is valid or not
+ * @param {string} link
+ * @returns {boolean} True if the link is valid
+ */
+const isValidLink = (link) => {
+  re =
+    /^[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/i;
+
+  return re.test(link);
+};
+
+/**
  * This functions checks the strength of the given password and returns how strong it is and a list suggetions to further strengthen the password
  * @param {string} password
  * @param {number} minLength
@@ -137,7 +149,7 @@ const genRegEx = (format) => {
   let startFrom = 0;
 
   // error handling for invalid cc
-  console.log(nos);
+  // console.log(nos);
   if (
     !Number.isInteger(parseInt(nos[0])) &&
     !["+(cc)", "(+cc)", "(cc)", "+cc", "cc"].includes(nos[0])
@@ -176,7 +188,7 @@ const genRegEx = (format) => {
     }
   }
 
-  console.log(nos, pattern);
+  // console.log(nos, pattern);
 
   let regEx = new RegExp(pattern);
   return regEx;
@@ -186,7 +198,7 @@ const genRegEx = (format) => {
  * This function checks if the given phone no is valid or not. If the phone no needs to be in a specific format that also can be done by providing the format param. To know more about foramt please read the docs.
  * @param {string} phone
  * @param {string} format
- * @returns {} True if the phone no is valid, if the format is wrong then "invalid format"
+ * @returns {boolean} True if the phone no is valid, if the format is wrong then "invalid format"
  */
 const isValidPhone = (phone, format) => {
   //if format is not provided, then a common regex will be used to validate the phone no
@@ -198,10 +210,10 @@ const isValidPhone = (phone, format) => {
   return re.test(phone);
 };
 
-console.log(isValidPhone());
-
 module.exports = {
   isValidEmail,
+  isValidLink,
+  isValidPhone,
   checkPasswordStrength,
   generatePassword,
 };
