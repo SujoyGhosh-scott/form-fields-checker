@@ -197,16 +197,29 @@ const genRegEx = (format) => {
 /**
  * This function checks if the given phone no is valid or not. If the phone no needs to be in a specific format that also can be done by providing the format param. To know more about foramt please read the docs.
  * @param {string} phone
- * @param {string} format
+ * @param {string | [string]} format
  * @returns {boolean} True if the phone no is valid, if the format is wrong then "invalid format"
  */
 const isValidPhone = (phone, format) => {
+  //if format is not provided, then a general regexp is used to validate
   if (!format) {
     let re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
     return re.test(phone);
   }
-  //if format is not provided, then a common regex will be used to validate the phone no
-  //if format is array, then map format otherwise run genRegEx only once
+
+  //in case there are multiple accepted formats
+  if (Array.isArray(format)) {
+    for (let i = 0; i < format.length; i++) {
+      let re = genRegEx(format[i]);
+      if (re === "invalid format") {
+        return re;
+      } else if (re.test(phone)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   let re = genRegEx(format);
   if (re === "invalid format") {
     return re;
